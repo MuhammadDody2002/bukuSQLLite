@@ -10,10 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class TambahActivity extends AppCompatActivity {
-
     private EditText etJudul, etPenulis, etTahun;
     private Button btnSimpan;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +30,25 @@ public class TambahActivity extends AppCompatActivity {
                 String getPenulis = etPenulis.getText().toString();
                 String getTahun = etTahun.getText().toString();
 
-                if (getJudul.trim().equals("")){
+                if(getJudul.trim().equals("")){
                     etJudul.setError("Judul Tidak Boleh Kosong");
                 }
-                else if (getPenulis.trim().equals("")){
-                    etPenulis.setError("Penulis Tidak Boleh kosong");
+                else if(getPenulis.trim().equals("")){
+                    etPenulis.setError("Penulis Tidak Boleh Kosong");
                 }
-                else if (getTahun.trim().equals("")){
-                    etTahun.setError("Tahun Terbit Harus Di Masukan");
+                else if(getTahun.trim().equals("")){
+                    etTahun.setError("Tahun Terbit Tidak Boleh Kosong");
                 }
                 else {
                     MyDatabaseHelper myDB = new MyDatabaseHelper(TambahActivity.this);
-                    long eksekusi = myDB.tambahBuku(getJudul,getPenulis,Integer.valueOf(getTahun));
-                    if (eksekusi == -1){
+                    long eksekusi =  myDB.tambahBuku(getJudul, getPenulis, Integer.valueOf(getTahun));
+                    if(eksekusi == -1){
                         Toast.makeText(TambahActivity.this, "Gagal Menambah Data", Toast.LENGTH_SHORT).show();
                         etJudul.requestFocus();
                     }
                     else {
-                        Toast.makeText(TambahActivity.this, "Tambah data Berhasil", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(TambahActivity.this,MainActivity.class));
+                        Toast.makeText(TambahActivity.this, "Tambah Data Berhasil", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(TambahActivity.this, MainActivity.class));
                         finish();
                     }
                 }
