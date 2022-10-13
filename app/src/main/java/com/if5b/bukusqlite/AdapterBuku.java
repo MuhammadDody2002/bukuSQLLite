@@ -47,9 +47,9 @@ public class AdapterBuku extends RecyclerView.Adapter<AdapterBuku.ViewHolderBuku
         TextView tvJudul, tvPenulis, tvTahun;
         public ViewHolderBuku(@NonNull View itemView) {
             super(itemView);
-            tvJudul = itemView.findViewById(R.id.et_judul);
-            tvPenulis = itemView.findViewById(R.id.et_penulis);
-            tvTahun = itemView.findViewById(R.id.et_tahun);
+            tvJudul = itemView.findViewById(R.id.tv_judul);
+            tvPenulis = itemView.findViewById(R.id.tv_penulis);
+            tvTahun = itemView.findViewById(R.id.tv_tahun);
         }
     }
 }

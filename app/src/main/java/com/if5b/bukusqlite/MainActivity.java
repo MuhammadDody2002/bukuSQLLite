@@ -1,6 +1,7 @@
 package com.if5b.bukusqlite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -22,21 +23,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rvBuku = findViewById(R.id.rv_buku);
-
         myDB = new MyDatabaseHelper(MainActivity.this);
         arrJudul = new ArrayList<>();
         arrPenulis = new ArrayList<>();
         arrTahun = new ArrayList<>();
 
-        
+        SQLiteToArrayList();
+        rvBuku = findViewById(R.id.rv_buku);
+        adapterBuku= new AdapterBuku(MainActivity.this,arrJudul,arrPenulis,arrTahun);
+        rvBuku.setAdapter(adapterBuku);
+        rvBuku.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+
     }
 
     public void bukaActivityTambah(View view) {
         startActivity(new Intent(MainActivity.this, TambahActivity.class));
 
     }
-    private void tabelKeArrayList(){
+    private void SQLiteToArrayList() {
         Cursor cursor = myDB.bacaSemuaData();
         if(cursor.getCount() == 0){
             Toast.makeText(this, "Tidak ada data", Toast.LENGTH_SHORT).show();
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             while (cursor.moveToNext()){
                 arrJudul.add(cursor.getString(1));
                 arrPenulis.add(cursor.getString(2));
-                arrJudul.add(cursor.getString(3));
+                arrTahun.add(cursor.getString(3));
             }
         }
 
